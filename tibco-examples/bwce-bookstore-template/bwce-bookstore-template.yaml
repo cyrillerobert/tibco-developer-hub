@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: bwce-bookstore-template
-  title: BWCE - Bookstore - Modified
+  title: BWCE - Bookstore - Modified2
   description: Modified Bookstore Sample Template
   tags:
     - tibco
@@ -74,7 +74,7 @@ spec:
       action: http:backstage:request
       input:
         method: 'POST'
-        path: '/proxy/jenkins'
+        path: '/api/proxy/jenkins'
         headers:
           test: 'hello'
           foo: 'bar'
