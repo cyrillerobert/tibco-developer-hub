@@ -74,10 +74,7 @@ spec:
       action: http:backstage:request
       input:
         method: 'POST'
-        path: '/api/proxy/jenkins'
-        headers:
-          test: 'hello'
-          foo: 'bar'
+        path: '/proxy/jenkins'
 
   output:
     getResponse: '{{ steps.backstage_request.output.body }}'
