@@ -75,7 +75,7 @@ spec:
       input:
         method: 'POST'
         path: '/proxy/jenkins/TestJob/buildWithParameters'
-      body:
+      params:
         token: 'my-token'
         param1: 'FOO'
 
