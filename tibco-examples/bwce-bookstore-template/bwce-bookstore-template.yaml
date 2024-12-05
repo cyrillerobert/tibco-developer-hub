@@ -74,9 +74,10 @@ spec:
       action: http:backstage:request
       input:
         method: 'POST'
-        path: '/proxy/jenkins?param1={{ parameters.name }}'
-      params:
-        param1: '{{ parameters.name }}'
+        path: '/proxy/jenkins/TestJob/buildWithParameters'
+      body:
+        token: 'my-token'
+        param1: 'FOO'
 
   output:
     getResponse: '{{ steps.backstage_request.output.body }}'
