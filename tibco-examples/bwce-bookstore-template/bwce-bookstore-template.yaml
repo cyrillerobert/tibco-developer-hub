@@ -75,7 +75,7 @@ spec:
       input:
         method: 'POST'
         path: '/proxy/jenkins'
-      params:
+      body:
         param1: ${{ parameters.name }}
 
   output:
