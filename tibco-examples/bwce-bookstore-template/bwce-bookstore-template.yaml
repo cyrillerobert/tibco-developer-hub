@@ -74,9 +74,9 @@ spec:
       action: http:backstage:request
       input:
         method: 'POST'
-        path: '/proxy/jenkins'
+        path: '/proxy/jenkins?param1={{ parameters.name }}'
       params:
-        param1: '${{ parameters.name }}'
+        param1: '{{ parameters.name }}'
 
   output:
     getResponse: '{{ steps.backstage_request.output.body }}'
