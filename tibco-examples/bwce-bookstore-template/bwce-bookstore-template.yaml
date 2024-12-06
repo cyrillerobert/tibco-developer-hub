@@ -2,8 +2,8 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: bwce-bookstore-template
-  title: BWCE - Bookstore - Modified2
-  description: Modified Bookstore Sample Template
+  title: BWCE - Bookstore
+  description: Bookstore Sample Template
   tags:
     - tibco
     - bwce
@@ -69,17 +69,25 @@ spec:
           owner: ${{ parameters.owner }}
           db_port: ${{ parameters.db_port }}
 
-    - id: backstage_request
-      name: backstage request
-      action: http:backstage:request
+    - id: publish
+      name: Publish
+      action: publish:github
       input:
-        method: 'POST'
-        path: '/proxy/jenkins/TestJob/buildWithParameters'
-        params:
-          token: 'my-token'
-          param1: ${{ parameters.name }}
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
 
   output:
-    getResponse: '{{ steps.backstage_request.output.body }}'
-    getCode: '{{ steps.backstage_request.output.code }}'
-    getHeaders: '{{ steps.backstage_request.output.headers }}'
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
